@@ -1,7 +1,7 @@
-#summary Overview of the Example Project
-= File Layout =
+# Overview of the Example Project
+## File Layout
 
-{{{
+```
 |-- lib
 |   |-- commons-lang-2.3.jar
 |   |-- junit-4.4.jar
@@ -27,23 +27,19 @@
         +-- felix
             +-- CTest.java
 
+```
 
-
-
-}}}
-
-= The Build Process =
+## The Build Process
 This would be built along these lines:
 
-http://buildobjects.googlecode.com/svn/trunk/example/docs/overview_scaled.png
-
+![](../example/docs/overview_scaled.png)
 
 Looking closer reveals sleeping concepts:
 
-http://buildobjects.googlecode.com/svn/trunk/example/docs/overview_module_hinted.jpg
+![](../example/docs/overview_module_hinted.jpg)
 
-= Separation of Concerns =
+## Separation of Concerns
 
-http://buildobjects.googlecode.com/svn/trunk/example/docs/build.png
+![](../example/docs/build.png)
 
-http://buildobjects.googlecode.com/svn/trunk/example/docs/modul.png
+![](../example/docs/modul.png)

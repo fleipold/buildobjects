@@ -4,9 +4,11 @@
 
 buildobjects is an object based general purpose build tool
 
-buildobjects provides a number of java classes that allow you to code your build process in a truly object oriented fashion. It is not forcing you into a certain way of structuring your code and projects. Instead it aims at providing useful building blocks.
+buildobjects provides a number of java classes that allow you to code your build process in a truly object-oriented fashion. 
+It is not forcing you into a certain way of structuring your code and projects. Instead it aims at providing useful building blocks.
 
-The rationale for using java was the availability of the full tool support to th build script. So when using buildobjects you get completetion, search for usage, and a fully featured debugger.
+The rationale for using java was the availability of the full tool support to th build script. So when using buildobjects 
+you get completetion, search for usage, and a fully featured debugger.
 
 This prototype was originally hosted in [google code](https://code.google.com/archive/p/buildobjects/) 
 and it has been migrated here for archiving purposes.
@@ -79,50 +81,33 @@ buildobjects-dep.jar on the classpath.
 How to run?
 -----------
 
-To trigger your build form the IDE you can just execute the main method in the buildfile. To run a build from the
+To trigger your build form the IDE you can just execute the main method in the build file. To run a build from the
 command line the buildfile has to be compiled. Fortunately the buildobjects Tasklets do the job for
 you: ` bo -source build Build`
 
-After running the build you will see a new directory appearing:
+After running the build you will see the following content in the target diretory:
 ~~~
-|-- target 
-    | 
-    |-- 20081106-145511-build.1 
-        | 
-        | 
-        |-- SUCCEEDED 
-        | 
-        | 
-        |-- index.html 
-| 
-| +-- testproject-simple 
-| 
-| 
-|-- test-results.txt 
-| 
-| +-- testproject-simple.jar 
-| 
-|-- environment.json 
-| +-- index.html`
+target 0 $ tree --charset unicode
+.
+|-- SUCCEEDED
+|-- index.html
+`-- testproject-simple
+    |-- test-results.txt
+    `-- testproject-simple.jar
 ~~~
-The target folder is associated with the build environment in which the builds happen. It has an index.html listing all
-the builds (as well as a json keeping things like the last buildnumber. For each build a new folder is created, that has
-all the build results.
 
 To see what this build actually published have a look at the
 [JavaModule](http://code.google.com/p/buildobjects/source/browse/trunk/core/src/org/buildobjects/projectmodel/JavaModule.java)
 class. It is expected that projects will define their own `JavaModule`
 class. If it is put in the build folder it will be compiled when the build is run.
 
-The example use here is available via svn:
-<http://buildobjects.googlecode.com/svn/trunk/example/testproject-simple>.
+[Full Example](example/testproject-simple).
 
 
-## Overview 
+## Project Structure 
 
-buildobjects is structured into mupltiple packages.In the `artifacts` package there is a number of classes that define
-different artificats. Artifacts are
-mainly [Sources](core/src/org/buildobjects/artifacts/Sources.java)
+buildobjects is structured into multiple packages.In the `artifacts` package there are a number of classes that define
+different artifacts. Artifacts are mainly [Sources](core/src/org/buildobjects/artifacts/Sources.java)
 and [Classes](core/src/org/buildobjects/artifacts/Classes.java)
 , which are representing filesystem like tree structures. The common aspect of `Sources` and `Classes` are abstracted
 in `Resources`. There are several implementations, e.g. classes in a directory structure, classes in a jar file or
@@ -141,4 +126,4 @@ the [Libraries](core/src/org/buildobjects/projectmodel/Libraries.java)
 class which provides a type safe way of expressing dependencies to external libraries.
 
 The `tasklet` package provides a [Tasklet] runner, that allows to run small java programs form the command line. This
-way you don't have to compile your buildfile to build your project.
+way you don't have to compile your build file to build your project.
