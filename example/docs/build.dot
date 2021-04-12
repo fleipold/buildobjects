@@ -1,0 +1,53 @@
+digraph dependencies {
+    rankdir = BT
+    compound = true
+
+
+    node [shape=box];
+
+    lib;
+    test_lib;
+
+    {rank =  same
+        "module_a/src" [label ="module_a/src\nmodule_a/src2"]
+
+        "module_a/test"
+
+        "module_b/src"
+        "module_b/test"
+
+    }
+
+    node [shape=oval]
+
+    module_a -> lib
+    module_a -> test_lib
+    module_a -> "module_a/src"
+    module_a -> "module_a/test"
+
+
+    module_b -> module_a
+
+
+    module_b -> lib
+    module_b -> test_lib
+
+    module_b -> "module_b/src"
+    module_b -> "module_b/test"
+
+
+    node [shape=box]
+
+    "module_b.jar"-> module_b
+
+    "module_a.jar" -> module_a
+
+    {rank = same
+        "module_b.jar"
+        "module_a.jar"
+      }
+
+
+
+
+}

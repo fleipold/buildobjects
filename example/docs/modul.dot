@@ -1,0 +1,22 @@
+digraph dependencies {
+rankdir = BT
+compound = true
+
+
+  node [shape=box];
+
+ {rank = same; src test_src libs_and_deps  test_lib}
+
+ {rank = same; "dist.jar" ; "test_report.txt"}
+
+ node [shape=oval]
+ compile -> {src; libs_and_deps}
+ test_compile -> {compile; test_src; test_lib}
+ test -> test_compile
+
+
+ "test_report.txt" -> test
+ "dist.jar"->compile
+
+
+}

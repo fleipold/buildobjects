@@ -1,0 +1,70 @@
+digraph dependencies {
+rankdir = BT
+compound = true
+
+
+  node [shape=box];
+
+ {rank = same; "module_b/test" "module_a/src" "module_a/test" "module_b/src"  "module_b/src"; "lib/mockito.jar"; "lib/commons-lang.jar"; "lib/junit.jar"}
+
+ {rank = same; "module_a.jar"; "module_b.jar"; "test_report.txt"}
+
+ "module_a/src"[label="module_a/src\nmodule_a/src_2"]
+
+  node [shape=oval]
+
+ test_lib -> "lib/mockito.jar"
+ test_lib -> "lib/junit.jar"
+
+ compile_module_a -> "module_a/src"
+
+
+ compile_module_a -> "lib/commons-lang.jar"
+ compile_test_module_a -> "module_a/test"
+
+
+ compile_test_module_a ->   test_lib
+
+subgraph cluster0{
+ color=black
+ style = dotted
+ label = module_a
+ labeljust = l
+
+
+ compile_test_module_a -> compile_module_a
+
+
+ test_module_a -> compile_test_module_a
+ 
+ "module_a.jar" -> compile_module_a
+}
+
+
+compile_module_b -> "module_b/src"
+compile_test_module_b -> "module_b/test"
+ compile_module_b -> "lib/commons-lang.jar"
+
+compile_test_module_b -> test_lib
+
+
+subgraph cluster1{
+ label = module_b
+ labeljust = r
+
+ color=black
+ style = dotted
+ compile_module_b -> compile_module_a
+ compile_test_module_b -> compile_module_b
+
+ test_module_b -> compile_test_module_b
+
+ "module_b.jar"-> compile_module_b
+ "test_report.txt" ->  test_module_a
+ "test_report.txt" ->  test_module_b
+
+ }
+
+ compile_module_b -> compile_module_a [ltail=cluster1, lhead=cluster0, style = dotted];
+
+}
